@@ -338,6 +338,8 @@
 (function(){
   "use strict";
 
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxRFzVRUsqPx0YWN_rCMzeOs29K0Z2wzyKBHlys5BJu4FwQkqOqKs4hEC47L3SVhzPj/exec";
+
   var MEMBERS_KEY = "gatehouse_members";
   var SETTINGS_KEY = "gatehouse_settings";
   var SESSION_KEY = "gatehouse_admin_session";
@@ -365,9 +367,32 @@
       settings.adminPassword = s.adminPassword || "admin123";
     }
   }
-  function saveMembers(){ saveMembersOk(safeSet(MEMBERS_KEY, members)); }
-  function saveMembersOk(ok){ if(!ok){ console.warn("Could not save to local storage."); } }
-  function saveSettings(){ safeSet(SETTINGS_KEY, settings); }
+  
+async function saveMembers(){
+
+    await fetch(GOOGLE_SCRIPT_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"saveMembers",
+            members:members
+        })
+    });
+
+}
+
+async function saveSettings(){
+
+    await fetch(GOOGLE_SCRIPT_URL,{
+        method:"POST",
+        body:JSON.stringify({
+            action:"saveSettings",
+            waLink:settings.waLink,
+            username:"fredd",
+            password:settings.adminPassword
+        })
+    });
+
+}
 
   function generateCode(){
     var code;

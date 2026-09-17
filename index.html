@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Kawamangaria Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EFEAE0;
+    --bg-panel:#FFFFFF;
+    --bg-sunken:#E6E0D2;
+    --ink:#20241F;
+    --ink-soft:#5B6058;
+    --ink-faint:#8B9086;
+    --accent:#2F5233;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#DCE6D9;
+    --amber:#95611C;
+    --amber-soft:#F3E4C9;
+    --red:#93362C;
+    --red-soft:#F3DAD6;
+    --line:#D8D2C3;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --radius: 3px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#181B16; --bg-panel:#20241D; --bg-sunken:#14170F;
+      --ink:#EAE7DC; --ink-soft:#A6AB9C; --ink-faint:#767C6D;
+      --accent:#7EB08A; --accent-ink:#12180F; --accent-soft:#263422;
+      --amber:#E3AB63; --amber-soft:#332711;
+      --red:#E28E80; --red-soft:#361F19;
+      --line:#333827;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#181B16; --bg-panel:#20241D; --bg-sunken:#14170F;
+    --ink:#EAE7DC; --ink-soft:#A6AB9C; --ink-faint:#767C6D;
+    --accent:#7EB08A; --accent-ink:#12180F; --accent-soft:#263422;
+    --amber:#E3AB63; --amber-soft:#332711;
+    --red:#E28E80; --red-soft:#361F19;
+    --line:#333827;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.5;
+    min-height:100vh;
+  }
+  ::selection{background:var(--accent-soft);}
+
+  .wrap{max-width:960px; margin:0 auto; padding:28px 20px 60px;}
+  .wrap.narrow{max-width:520px;}
+
+  .top{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:28px;
+  }
+  .brand{display:flex; align-items:center; gap:11px;}
+  .brand svg{flex:none;}
+  .brand-name{font-family:var(--serif); font-size:23px; font-weight:600; letter-spacing:-0.01em;}
+  .brand-tag{font-size:12.5px; color:var(--ink-faint); margin-top:1px;}
+
+  .whoami{
+    display:flex; align-items:center; gap:10px;
+    font-size:12.5px; color:var(--ink-soft);
+  }
+  .whoami .avatar{
+    width:30px; height:30px; border-radius:50%;
+    background:var(--accent); color:var(--accent-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:12px; flex:none;
+  }
+  .whoami strong{display:block; color:var(--ink); font-size:13px;}
+
+  h1,h2,h3{font-family:var(--serif); font-weight:600; margin:0;}
+  h2{font-size:21px; letter-spacing:-0.01em;}
+  h3{font-size:15px;}
+  p{margin:0;}
+
+  .panel{
+    background:var(--bg-panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px;
+  }
+  .panel + .panel{margin-top:18px;}
+
+  .field{margin-bottom:14px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:block; font-size:12.5px; color:var(--ink-soft); margin-bottom:5px; font-weight:600;}
+  .field .hint{font-size:11.5px; color:var(--ink-faint); margin-top:4px;}
+  input[type=text], input[type=password], input[type=tel]{
+    width:100%; background:var(--bg-sunken); border:1px solid var(--line);
+    color:var(--ink); padding:10px 12px; border-radius:4px;
+    font-family:var(--sans); font-size:14px;
+  }
+  input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  input.mono{font-family:var(--mono); letter-spacing:0.05em;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:6px;
+    border:1px solid var(--line); background:var(--bg-panel); color:var(--ink);
+    font-family:var(--sans); font-weight:600; font-size:13px;
+    padding:9px 15px; border-radius:4px; cursor:pointer; white-space:nowrap;
+    text-decoration:none;
+  }
+  .btn:hover{border-color:var(--ink-faint);}
+  .btn-primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{background:transparent; border-color:transparent; padding:8px 10px;}
+  .btn-danger{color:var(--red);}
+  .btn-danger:hover{border-color:var(--red);}
+  .btn-sm{padding:6px 10px; font-size:12px;}
+  .btn-block{width:100%; justify-content:center;}
+
+  .row{display:flex; gap:12px; flex-wrap:wrap;}
+  .row > *{flex:1; min-width:160px;}
+  .form-inline{display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;}
+  .form-inline .field{flex:1; min-width:150px; margin-bottom:0;}
+
+  .badge{display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:20px;}
+  .badge-approved{background:var(--accent-soft); color:var(--accent);}
+  .badge-pending{background:var(--amber-soft); color:var(--amber);}
+  .badge-dot{width:6px; height:6px; border-radius:50%; background:currentColor;}
+
+  table{width:100%; border-collapse:collapse;}
+  thead th{text-align:left; font-size:11.5px; font-weight:700; color:var(--ink-faint); padding:0 10px 8px; border-bottom:1px solid var(--line);}
+  tbody td{padding:12px 10px; border-bottom:1px solid var(--line); font-size:13.5px; vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  .member-name{font-weight:600;}
+  .member-number, .member-code{font-family:var(--mono); font-size:12.5px; color:var(--ink-soft);}
+  .actions-cell{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+
+  .empty{text-align:center; padding:40px 20px; color:var(--ink-faint); font-size:13.5px;}
+
+  .stat-row{display:flex; gap:14px; margin-bottom:18px; flex-wrap:wrap;}
+  .stat{background:var(--bg-sunken); border-radius:4px; padding:12px 16px; min-width:110px;}
+  .stat .num{font-family:var(--serif); font-size:22px; font-weight:600;}
+  .stat .lbl{font-size:11.5px; color:var(--ink-faint); margin-top:2px;}
+
+  .lead{color:var(--ink-soft); font-size:14px; margin-top:6px;}
+  .error-text{color:var(--red); font-size:12.5px; margin-top:8px;}
+  .success-text{color:var(--accent); font-size:12.5px; margin-top:8px;}
+
+  .verify-result{margin-top:18px; padding:20px; border-radius:4px; border:1px solid var(--line);}
+  .verify-result.ok{background:var(--accent-soft); border-color:var(--accent);}
+  .verify-result.pending{background:var(--amber-soft); border-color:var(--amber);}
+  .verify-result.bad{background:var(--red-soft); border-color:var(--red);}
+  .verify-result h3{margin-bottom:6px;}
+  .verify-result p{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+
+  .wa-btn{
+    display:inline-flex; align-items:center; gap:8px; margin-top:15px;
+    background:#25D366; color:#0B2712; font-weight:700; font-size:13.5px;
+    padding:12px 20px; border-radius:4px; text-decoration:none;
+  }
+
+  .logout-row{display:flex; justify-content:flex-end; gap:6px; margin-bottom:14px;}
+
+  footer{
+    text-align:center; color:var(--ink-faint); font-size:11.5px;
+    margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
+  }
+  footer a{color:var(--ink-faint); text-decoration:underline; text-underline-offset:2px; cursor:pointer;}
+  footer a:hover{color:var(--ink-soft);}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:12.5px; color:var(--ink-soft); cursor:pointer;
+    text-decoration:none; margin-bottom:18px;
+  }
+  .back-link:hover{color:var(--ink);}
+
+  @media (max-width:640px){
+    .top{flex-direction:column; align-items:flex-start;}
+    thead{display:none;}
+    tbody tr{display:block; border-bottom:8px solid var(--bg); padding:10px 0;}
+    tbody td{display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding:8px 4px;}
+    tbody td::before{content:attr(data-label); font-size:11px; font-weight:700; color:var(--ink-faint);}
+    .actions-cell{justify-content:flex-start; width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="pageWrap">
+
+  <div class="top">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <circle cx="15" cy="9" r="4" stroke="currentColor" stroke-width="1.6" style="color:var(--ink)"/>
+        <path d="M6 26v-2.5C6 19.9 10 18 15 18s9 1.9 9 5.5V26" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="color:var(--ink)"/>
+        <circle cx="24.5" cy="7.5" r="2.2" fill="currentColor" style="color:var(--accent)"/>
+      </svg>
+      <div>
+        <div class="brand-name">New Kawamangaria Family</div>
+        <div class="brand-tag" id="brandTag">Member portal</div>
+      </div>
+    </div>
+    <div class="whoami" id="whoami" style="display:none;">
+      <div class="avatar">FO</div>
+      <div>
+        <strong>Fred Odinga</strong>
+        <span>Administrator</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MEMBER PORTAL (default, no credentials) ============ -->
+  <div id="memberView">
+    <h2>Check your membership</h2>
+    <p class="lead">Enter your member number and the access code sent to you on WhatsApp.</p>
+
+    <div class="panel" style="margin-top:20px;">
+      <div class="field">
+        <label for="vNumber">Member number</label>
+        <input type="text" id="vNumber" class="mono" placeholder="e.g. M-014" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="vCode">Access code</label>
+        <input type="text" id="vCode" class="mono" placeholder="e.g. 7QK3XR" autocomplete="off">
+        <div class="hint">Six characters, letters and numbers. Case doesn't matter.</div>
+      </div>
+      <button class="btn btn-primary btn-block" id="verifyBtn" style="margin-top:6px;">Check my status</button>
+    </div>
+    <div id="verifyResult"></div>
+  </div>
+
+  <!-- ============ ADMIN LOGIN ============ -->
+  <div id="loginView" style="display:none;">
+    <a class="back-link" id="backToMember1">&larr; Back to member portal</a>
+    <h2>Administrator sign in</h2>
+    <p class="lead">Restricted area. Credentials required.</p>
+    <div class="panel" style="margin-top:20px;">
+      <div class="field">
+        <label for="userInput">Username</label>
+        <input type="text" id="userInput" placeholder="Username" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="pwInput">Password</label>
+        <input type="password" id="pwInput" placeholder="Password" autocomplete="off">
+        <div class="hint"><strong>Fredd Odinga</strong></div>
+      </div>
+      <button class="btn btn-primary btn-block" id="loginBtn" style="margin-top:6px;">Sign in</button>
+      <div id="loginError" class="error-text" style="display:none;">Incorrect username or password.</div>
+    </div>
+  </div>
+
+  <!-- ============ ADMIN DASHBOARD ============ -->
+  <div id="dashboardView" style="display:none;">
+    <div class="logout-row">
+      <button class="btn btn-ghost btn-sm" id="viewMemberPortalBtn">View member portal</button>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign out</button>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="statTotal">0</div><div class="lbl">Members</div></div>
+      <div class="stat"><div class="num" id="statApproved">0</div><div class="lbl">Approved</div></div>
+      <div class="stat"><div class="num" id="statPending">0</div><div class="lbl">Pending</div></div>
+    </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom:14px;">WhatsApp group link</h3>
+      <div class="form-inline">
+        <div class="field">
+          <label for="waLinkInput">Group invite link</label>
+          <input type="text" id="waLinkInput" placeholder="https://chat.whatsapp.com/…">
+        </div>
+        <button class="btn btn-primary" id="saveWaLinkBtn">Save link</button>
+      </div>
+      <div id="waLinkSaved" class="success-text" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom:14px;">Change admin password</h3>
+      <div class="form-inline">
+        <div class="field">
+          <label for="newPwInput">New password</label>
+          <input type="password" id="newPwInput" placeholder="At least 4 characters">
+        </div>
+        <button class="btn" id="savePwBtn">Update password</button>
+      </div>
+      <div id="pwSaved" class="success-text" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <h3 style="margin-bottom:14px;">Add a member</h3>
+      <div class="row">
+        <div class="field">
+          <label for="nameInput">Full name</label>
+          <input type="text" id="nameInput" placeholder="e.g. Wanjiru Kamau">
+        </div>
+        <div class="field">
+          <label for="numberInput">Member number</label>
+          <input type="text" id="numberInput" class="mono" placeholder="e.g. M-014">
+        </div>
+        <div class="field">
+          <label for="phoneInput">WhatsApp number <span style="font-weight:400; color:var(--ink-faint);">(optional)</span></label>
+          <input type="tel" id="phoneInput" placeholder="e.g. 2547XXXXXXXX">
+        </div>
+      </div>
+      <div class="field" style="margin-top:2px;">
+        <span class="hint">Payment status is set automatically to <strong>200</strong>, and a unique access code is generated on add.</span>
+      </div>
+      <button class="btn btn-primary" id="addMemberBtn" style="margin-top:10px;">Add member</button>
+      <div id="addError" class="error-text" style="display:none;"></div>
+    </div>
+
+    <div class="panel" style="padding-bottom:8px;">
+      <h3 style="margin-bottom:16px;">Members</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Member #</th><th>Payment</th>
+            <th>Access code</th><th>Status</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="membersBody"></tbody>
+      </table>
+      <div id="emptyState" class="empty" style="display:none;">No members yet. Add your first one above.</div>
+    </div>
+  </div>
+
+  <footer>
+    <span id="footerNote">New Kawamangaria Family &middot;</span>
+    <span id="footerAdminWrap"> &middot; <a id="adminAccessLink">Administrator access</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var MEMBERS_KEY = "gatehouse_members";
+  var SETTINGS_KEY = "gatehouse_settings";
+  var SESSION_KEY = "gatehouse_admin_session";
+
+  var ADMIN_USERNAME = "fredd";
+  var CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  var members = [];
+  var settings = { waLink: "", adminPassword: "admin123" };
+
+  function safeGet(key){
+    try{ var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }
+    catch(e){ return null; }
+  }
+  function safeSet(key, val){
+    try{ localStorage.setItem(key, JSON.stringify(val)); return true; }
+    catch(e){ return false; }
+  }
+  function loadData(){
+    var m = safeGet(MEMBERS_KEY);
+    var s = safeGet(SETTINGS_KEY);
+    members = Array.isArray(m) ? m : [];
+    if(s && typeof s === "object"){
+      settings.waLink = s.waLink || "";
+      settings.adminPassword = s.adminPassword || "admin123";
+    }
+  }
+  function saveMembers(){ saveMembersOk(safeSet(MEMBERS_KEY, members)); }
+  function saveMembersOk(ok){ if(!ok){ console.warn("Could not save to local storage."); } }
+  function saveSettings(){ safeSet(SETTINGS_KEY, settings); }
+
+  function generateCode(){
+    var code;
+    do{
+      code = "";
+      for(var i=0;i<6;i++){ code += CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)]; }
+    } while(members.some(function(m){ return m.code === code; }));
+    return code;
+  }
+  function uid(){ return "m_" + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function isLoggedIn(){ return safeGet(SESSION_KEY) === true; }
+
+  // ---------- Views ----------
+  var wrap = document.getElementById("pageWrap");
+  var memberView = document.getElementById("memberView");
+  var loginView = document.getElementById("loginView");
+  var dashboardView = document.getElementById("dashboardView");
+  var whoami = document.getElementById("whoami");
+  var brandTag = document.getElementById("brandTag");
+  var footerAdminWrap = document.getElementById("footerAdminWrap");
+
+  function hideAll(){
+    memberView.style.display = "none";
+    loginView.style.display = "none";
+    dashboardView.style.display = "none";
+  }
+
+  function showMember(){
+    hideAll();
+    memberView.style.display = "block";
+    wrap.classList.add("narrow");
+    whoami.style.display = "none";
+    brandTag.textContent = "Member portal";
+    footerAdminWrap.style.display = "inline";
+    document.getElementById("verifyResult").innerHTML = "";
+  }
+
+  function showLogin(){
+    hideAll();
+    loginView.style.display = "block";
+    wrap.classList.add("narrow");
+    whoami.style.display = "none";
+    brandTag.textContent = "Administration";
+    footerAdminWrap.style.display = "none";
+    document.getElementById("loginError").style.display = "none";
+  }
+
+  function showDashboard(){
+    hideAll();
+    dashboardView.style.display = "block";
+    wrap.classList.remove("narrow");
+    whoami.style.display = "flex";
+    brandTag.textContent = "Administration";
+    footerAdminWrap.style.display = "none";
+    renderDashboard();
+  }
+
+  function enterAdmin(){
+    if(isLoggedIn()){ showDashboard(); } else { showLogin(); }
+  }
+
+  document.getElementById("adminAccessLink").addEventListener("click", enterAdmin);
+  document.getElementById("backToMember1").addEventListener("click", showMember);
+  document.getElementById("viewMemberPortalBtn").addEventListener("click", showMember);
+
+  // ---------- Auth ----------
+  document.getElementById("loginBtn").addEventListener("click", function(){
+    var user = document.getElementById("userInput").value.trim().toLowerCase();
+    var pw = document.getElementById("pwInput").value;
+    var errEl = document.getElementById("loginError");
+    if(user === ADMIN_USERNAME && pw === settings.adminPassword){
+      safeSet(SESSION_KEY, true);
+      errEl.style.display = "none";
+      document.getElementById("userInput").value = "";
+      document.getElementById("pwInput").value = "";
+      showDashboard();
+    } else {
+      errEl.style.display = "block";
+    }
+  });
+  ["userInput","pwInput"].forEach(function(id){
+    document.getElementById(id).addEventListener("keydown", function(e){
+      if(e.key === "Enter"){ document.getElementById("loginBtn").click(); }
+    });
+  });
+  document.getElementById("logoutBtn").addEventListener("click", function(){
+    safeSet(SESSION_KEY, false);
+    showMember();
+  });
+
+  // ---------- Settings ----------
+  document.getElementById("saveWaLinkBtn").addEventListener("click", function(){
+    settings.waLink = document.getElementById("waLinkInput").value.trim();
+    saveSettings();
+    inlineNote("waLinkSaved", "Link saved.", false);
+  });
+  document.getElementById("savePwBtn").addEventListener("click", function(){
+    var val = document.getElementById("newPwInput").value;
+    if(val.length < 4){ inlineNote("pwSaved", "Password must be at least 4 characters.", true); return; }
+    settings.adminPassword = val;
+    saveSettings();
+    document.getElementById("newPwInput").value = "";
+    inlineNote("pwSaved", "Password updated.", false);
+  });
+  function inlineNote(id, text, isError){
+    var el = document.getElementById(id);
+    el.textContent = text;
+    el.style.color = isError ? "var(--red)" : "var(--accent)";
+    el.style.display = "block";
+    setTimeout(function(){ el.style.display = "none"; }, 2500);
+  }
+
+  // ---------- Add member ----------
+  document.getElementById("addMemberBtn").addEventListener("click", function(){
+    var name = document.getElementById("nameInput").value.trim();
+    var number = document.getElementById("numberInput").value.trim();
+    var phone = document.getElementById("phoneInput").value.trim();
+    var errEl = document.getElementById("addError");
+
+    if(!name || !number){
+      errEl.textContent = "Enter a name and a member number.";
+      errEl.style.display = "block"; return;
+    }
+    if(members.some(function(m){ return m.number.toLowerCase() === number.toLowerCase(); })){
+      errEl.textContent = "That member number is already in use.";
+      errEl.style.display = "block"; return;
+    }
+    errEl.style.display = "none";
+
+    members.push({
+      id: uid(), name: name, number: number, phone: phone,
+      code: generateCode(), status: "pending", payment: 200
+    });
+    saveMembers();
+    document.getElementById("nameInput").value = "";
+    document.getElementById("numberInput").value = "";
+    document.getElementById("phoneInput").value = "";
+    renderDashboard();
+  });
+
+  // ---------- Dashboard render ----------
+  function renderDashboard(){
+    document.getElementById("waLinkInput").value = settings.waLink;
+    document.getElementById("statTotal").textContent = members.length;
+    document.getElementById("statApproved").textContent = members.filter(function(m){ return m.status==="approved"; }).length;
+    document.getElementById("statPending").textContent = members.filter(function(m){ return m.status==="pending"; }).length;
+
+    var body = document.getElementById("membersBody");
+    var empty = document.getElementById("emptyState");
+    body.innerHTML = "";
+
+    if(members.length === 0){ empty.style.display = "block"; return; }
+    empty.style.display = "none";
+
+    members.forEach(function(m){
+      var tr = document.createElement("tr");
+
+      var tdName = document.createElement("td");
+      tdName.setAttribute("data-label","Name");
+      var nameSpan = document.createElement("span");
+      nameSpan.className = "member-name";
+      nameSpan.textContent = m.name;
+      tdName.appendChild(nameSpan);
+      tr.appendChild(tdName);
+
+      var tdNum = document.createElement("td");
+      tdNum.setAttribute("data-label","Member #");
+      var numSpan = document.createElement("span");
+      numSpan.className = "member-number";
+      numSpan.textContent = m.number;
+      tdNum.appendChild(numSpan);
+      tr.appendChild(tdNum);
+
+      var tdPay = document.createElement("td");
+      tdPay.setAttribute("data-label","Payment");
+      tdPay.textContent = m.payment;
+      tr.appendChild(tdPay);
+
+      var tdCode = document.createElement("td");
+      tdCode.setAttribute("data-label","Access code");
+      var codeSpan = document.createElement("span");
+      codeSpan.className = "member-code";
+      codeSpan.textContent = m.code;
+      var copyBtn = document.createElement("button");
+      copyBtn.className = "btn btn-ghost btn-sm";
+      copyBtn.textContent = "Copy";
+      copyBtn.addEventListener("click", function(){ copyText(m.code, copyBtn); });
+      tdCode.appendChild(codeSpan);
+      tdCode.appendChild(copyBtn);
+      tr.appendChild(tdCode);
+
+      var tdStatus = document.createElement("td");
+      tdStatus.setAttribute("data-label","Status");
+      var badge = document.createElement("span");
+      badge.className = "badge " + (m.status === "approved" ? "badge-approved" : "badge-pending");
+      var dot = document.createElement("span");
+      dot.className = "badge-dot";
+      badge.appendChild(dot);
+      badge.appendChild(document.createTextNode(m.status === "approved" ? "Approved" : "Pending"));
+      tdStatus.appendChild(badge);
+      tr.appendChild(tdStatus);
+
+      var tdActions = document.createElement("td");
+      tdActions.setAttribute("data-label","Actions");
+      tdActions.className = "actions-cell";
+
+      var toggleBtn = document.createElement("button");
+      toggleBtn.className = "btn btn-sm";
+      toggleBtn.textContent = m.status === "approved" ? "Set pending" : "Approve";
+      toggleBtn.addEventListener("click", function(){
+        m.status = m.status === "approved" ? "pending" : "approved";
+        saveMembers();
+        renderDashboard();
+      });
+      tdActions.appendChild(toggleBtn);
+
+      var message = "Hello " + m.name + ", welcome to Kawamangaria Family. Your access code is " + m.code +
+                    ". Use it together with your member number (" + m.number +
+                    ") on the member portal to confirm your status and join the WhatsApp group.";
+
+      if(m.phone){
+        var waBtn = document.createElement("a");
+        waBtn.className = "btn btn-sm";
+        waBtn.textContent = "Send via WhatsApp";
+        waBtn.target = "_blank";
+        waBtn.rel = "noopener noreferrer";
+        waBtn.href = "https://wa.me/" + m.phone.replace(/[^0-9]/g,"") + "?text=" + encodeURIComponent(message);
+        tdActions.appendChild(waBtn);
+      } else {
+        var copyMsgBtn = document.createElement("button");
+        copyMsgBtn.className = "btn btn-sm";
+        copyMsgBtn.textContent = "Copy message";
+        copyMsgBtn.addEventListener("click", function(){ copyText(message, copyMsgBtn); });
+        tdActions.appendChild(copyMsgBtn);
+      }
+
+      var delBtn = document.createElement("button");
+      delBtn.className = "btn btn-sm btn-danger";
+      delBtn.textContent = "Delete";
+      var confirming = false, confirmTimer = null;
+      delBtn.addEventListener("click", function(){
+        if(!confirming){
+          confirming = true;
+          delBtn.textContent = "Confirm delete";
+          confirmTimer = setTimeout(function(){ confirming = false; delBtn.textContent = "Delete"; }, 3000);
+        } else {
+          clearTimeout(confirmTimer);
+          members = members.filter(function(x){ return x.id !== m.id; });
+          saveMembers();
+          renderDashboard();
+        }
+      });
+      tdActions.appendChild(delBtn);
+
+      tr.appendChild(tdActions);
+      body.appendChild(tr);
+    });
+  }
+
+  function copyText(text, btn){
+    var original = btn.textContent;
+    function done(ok){
+      btn.textContent = ok ? "Copied" : "Copy failed";
+      setTimeout(function(){ btn.textContent = original; }, 1500);
+    }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ done(true); }).catch(function(){ done(false); });
+    }catch(e){ done(false); }
+  }
+
+  // ---------- Member verification ----------
+  document.getElementById("verifyBtn").addEventListener("click", function(){
+    loadData();
+    var number = document.getElementById("vNumber").value.trim();
+    var code = document.getElementById("vCode").value.trim();
+    var resultEl = document.getElementById("verifyResult");
+
+    if(!number || !code){
+      resultEl.innerHTML = '<div class="verify-result bad"><h3>Missing details</h3><p>Enter both your member number and your access code.</p></div>';
+      return;
+    }
+
+    var match = members.find(function(m){
+      return m.number.toLowerCase() === number.toLowerCase() && m.code.toUpperCase() === code.toUpperCase();
+    });
+
+    if(!match){
+      resultEl.innerHTML = '<div class="verify-result bad"><h3>No match found</h3><p>Please check your member number and access code and try again. If the problem continues, contact the administrator.</p></div>';
+      return;
+    }
+
+    if(match.status !== "approved"){
+      resultEl.innerHTML = '<div class="verify-result pending"><h3>Pending approval</h3><p>Hello ' + escapeHtml(match.name) +
+        ', your details are on file but your membership has not been approved yet. The join link will appear here once it is.</p></div>';
+      return;
+    }
+
+    if(!settings.waLink){
+      resultEl.innerHTML = '<div class="verify-result ok"><h3>Approved &mdash; ' + escapeHtml(match.name) +
+        '</h3><p>Your membership is confirmed, but the group link has not been set up yet. Please check back shortly.</p></div>';
+      return;
+    }
+
+    resultEl.innerHTML = '<div class="verify-result ok"><h3>Approved &mdash; ' + escapeHtml(match.name) +
+      '</h3><p>Welcome to Kawamangaria Family. Tap below to join the WhatsApp group.</p>' +
+      '<a class="wa-btn" href="' + escapeAttr(settings.waLink) + '" target="_blank" rel="noopener noreferrer">Join WhatsApp group</a></div>';
+  });
+
+  ["vNumber","vCode"].forEach(function(id){
+    document.getElementById(id).addEventListener("keydown", function(e){
+      if(e.key === "Enter"){ document.getElementById("verifyBtn").click(); }
+    });
+  });
+
+  function escapeHtml(str){
+    var d = document.createElement("div");
+    d.textContent = str;
+    return d.innerHTML;
+  }
+  function escapeAttr(str){ return String(str).replace(/"/g, "&quot;"); }
+
+  // ---------- Init ----------
+  loadData();
+  if(isLoggedIn()){ showDashboard(); } else { showMember(); }
+})();
+</script>
+</body>
+</html>
